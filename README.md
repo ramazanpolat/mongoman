@@ -1,2 +1,2 @@
 # mongoman
-MongoManager makes it easy to connect to MongoDB and maintain that connection.
+PyMongo wrapper that provides ORM and easy MongoDB connection handling.
