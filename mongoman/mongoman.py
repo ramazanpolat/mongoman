@@ -6,7 +6,7 @@ from pymongo.collection import Collection
 import logging
 
 logger = logging.getLogger('MongoMan')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.ERROR)
 
 formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
 

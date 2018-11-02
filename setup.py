@@ -20,7 +20,7 @@ REQUIRES_PYTHON = '>=3.6.0'
 VERSION = None
 
 # What packages are required for this module to be executed?
-REQUIRED = ["Prodict >= 0.8"]
+REQUIRED = ["Prodict >= 0.8", 'pymongo >= 3.7']
 
 # What packages are optional?
 EXTRAS = {
@@ -93,7 +93,7 @@ class UploadCommand(Command):
 setup(
     name=NAME,
     version=about['__version__'],
-    packages=['mongoman'],
+    packages=find_packages(exclude=('tests', 'iterlearn')),
     url=URL,
     license='MIT',
     author=AUTHOR,
