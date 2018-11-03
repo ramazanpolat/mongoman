@@ -1,43 +1,64 @@
-===========
-Towel Stuff
-===========
-
-Towel Stuff provides such and such and so and so. You might find
-it most useful for tasks involving <x> and also <y>. Typical usage
-often looks like this::
-
-    #!/usr/bin/env python
-
-    from towelstuff import location
-    from towelstuff import utils
-
-    if utils.has_towel():
-        print "Your towel is located:", location.where_is_my_towel()
-
-(Note the double-colon and 4-space indent formatting above.)
-
-Paragraphs are separated by blank lines. *Italics*, **bold**,
-and ``monospace`` look like this.
+# mongoman
+PyMongo wrapper that provides ORM and easy MongoDB connection handling.
 
 
-A Section
-=========
+# features
 
-Lists look like this:
+Opening and closing MongoDB connection in all over your code is not a good practice.
 
-* First
+MongoMan provides a default instance which you can use in anywhere in your code to access to MongoDB, without needing to connect it again.
 
-* Second. Can be multiple lines
-  but must be indented properly.
+main.py
 
-A Sub-Section
--------------
+    from mongoman import MongoMan
+    
+    mm = MongoMan(host='localhost', port=27017, user='username', password='password')
 
-Numbered lists look like you'd expect:
+    customers = mm.collection('customers')
 
-1. hi there
+    for customer in customers.find():
+        print(customer)
 
-2. must be going
+    # {_id:'5bdca8840ab05daa3f2f1e72', name:'John Appleseed', age:42}
+    # {_id:'5bdca8840ab05daa3f2f1e84', name:'Middle Man', age:38}
+    
+side.py
 
-Urls are http://like.this and links can be
-written `like this <http://www.example.com/foo/bar>`_.
+    # --- IN SOME OTHER FILE ---
+    from mongoman import MongoMan
+    
+    # if you are already connected to MongoDB in somewhere else, just get the default instance
+    mm = MongoMan.default_instance()
+    
+    # You can use ORM Prodict
+    
+    class Customer(Prodict):
+        name: str
+        age: int
+
+        def __repr__(self):
+            return 'Customer(name=%s, age=%d)' % (self.name, self.age)
+            
+        @property
+        def number(self):
+            return 42
+            
+            
+    customers = mm.collection('customers')
+    
+    # Add 'model' parameter to map the result to a Prodict object
+    customer = customers.find_one(model=Customer)
+    print(customer)
+    print('name:', customer.name) 
+    print('age:', customer.age)
+    print('type:', type(customer).__name__)
+        
+    # Customer(name=tango, age=42)
+    # name: tango
+    # age: 42
+    # type: Customer
+    
+    
+    
+        
+
