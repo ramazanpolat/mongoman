@@ -9,7 +9,7 @@ Opening and closing MongoDB connection in all over your code is not a good pract
 MongoMan provides a default instance which you can use in anywhere in your code to access to MongoDB, without needing to connect it again.
 
 main.py
-
+```python
     from mongoman import MongoMan
     
     mm = MongoMan(host='localhost', port=27017, user='username', password='password')
@@ -21,9 +21,11 @@ main.py
 
     # {_id:'5bdca8840ab05daa3f2f1e72', name:'John Appleseed', age:42}
     # {_id:'5bdca8840ab05daa3f2f1e84', name:'Middle Man', age:38}
-    
+```
+
 side.py
 
+```python
     # --- IN SOME OTHER FILE ---
     from mongoman import MongoMan
     
@@ -57,7 +59,7 @@ side.py
     # name: tango
     # age: 42
     # type: Customer
-    
+```
     
     
         
