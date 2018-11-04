@@ -32,20 +32,29 @@ side.py
     # if you are already connected to MongoDB in somewhere else, just get the default instance
     mm = MongoMan.default_instance()
     
-    # You can use ORM Prodict
+    customers = mm.collection('customers')
+    
+    # Add 'model' parameter to map the result to a Prodict object
+    customer = customers.find_one(model=Prodict)
+    print(customer)
+    print('name:', customer.name) 
+    print('age:', customer.age)
+    print('type:', type(customer).__name__)
+        
+    # {'_id':'5bdca8840ab05daa3f2f1e72', 'name'=tango, 'age'=42]
+    # name: tango
+    # age: 42
+    # type: Prodict
+```
+
+if you want to have auto code completion for mapped [Prodict](https://github.com/ramazanpolat/prodict) objects(they are essentially ``dict`` objects supporting dot-accessible attributes), you can define a model beforehand like this:
+
+```python
     
     class Customer(Prodict):
         name: str
         age: int
-
-        def __repr__(self):
-            return 'Customer(name=%s, age=%d)' % (self.name, self.age)
-            
-        @property
-        def number(self):
-            return 42
-            
-            
+        
     customers = mm.collection('customers')
     
     # Add 'model' parameter to map the result to a Prodict object
@@ -54,13 +63,16 @@ side.py
     print('name:', customer.name) 
     print('age:', customer.age)
     print('type:', type(customer).__name__)
-        
-    # Customer(name=tango, age=42)
+    
+    # {'_id':'5bdca8840ab05daa3f2f1e72', 'name'=tango, 'age'=42]
     # name: tango
     # age: 42
     # type: Customer
-```
-    
-    
+````
+Prodict models are pretty straightforward but you can check repo of [Prodict](https://github.com/ramazanpolat/prodict) in order to get more info.
+
         
+
+# Thanks
+I would like to thank to [JetBrains](https://www.jetbrains.com/) for creating [PyCharm](https://www.jetbrains.com/pycharm/), the IDE that made my life better.
 
